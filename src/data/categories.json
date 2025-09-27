@@ -1,0 +1,56 @@
+[
+  {
+    "id": "1",
+    "name": "Éclairage",
+    "slug": "eclairage",
+    "description": "LED, phares, feux arrière et éclairage d'ambiance",
+    "image": "/images/categories/eclairage.jpg",
+    "isVisible": true,
+    "sortOrder": 1
+  },
+  {
+    "id": "2", 
+    "name": "Intérieur",
+    "slug": "interieur",
+    "description": "Housses, tapis, coussins et accessoires habitacle",
+    "image": "/images/categories/interieur.jpg",
+    "isVisible": true,
+    "sortOrder": 2
+  },
+  {
+    "id": "3",
+    "name": "Extérieur",
+    "slug": "exterieur", 
+    "description": "Jantes, stickers, pare-soleil et protection carrosserie",
+    "image": "/images/categories/exterieur.jpg",
+    "isVisible": true,
+    "sortOrder": 3
+  },
+  {
+    "id": "4",
+    "name": "Audio & Multimédia",
+    "slug": "audio-multimedia",
+    "description": "Autoradios, haut-parleurs, écrans et supports",
+    "image": "/images/categories/audio.jpg", 
+    "isVisible": true,
+    "sortOrder": 4
+  },
+  {
+    "id": "5",
+    "name": "Confort",
+    "slug": "confort",
+    "description": "Coussins, organiseurs, refroidisseurs et chauffage",
+    "image": "/images/categories/confort.jpg",
+    "isVisible": true,
+    "sortOrder": 5
+  },
+  {
+    "id": "6",
+    "name": "Sécurité",
+    "slug": "securite", 
+    "description": "Caméras, alarmes, antivols et équipements de sécurité",
+    "image": "/images/categories/securite.jpg",
+    "isVisible": true,
+    "sortOrder": 6
+  }
+]

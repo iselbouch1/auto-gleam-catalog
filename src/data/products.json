@@ -1,0 +1,204 @@
+[
+  {
+    "id": "1",
+    "name": "Kit LED Intérieur Premium",
+    "slug": "kit-led-interieur-premium",
+    "shortDescription": "Éclairage LED complet pour habitacle avec télécommande",
+    "description": "Transformez l'ambiance de votre véhicule avec ce kit LED premium. 8 bandes LED RGB avec télécommande, 16 millions de couleurs disponibles, installation plug-and-play. Compatible avec la plupart des véhicules via prise 12V.",
+    "categoryIds": ["1", "2"],
+    "tags": ["LED", "RGB", "Premium", "Télécommande"],
+    "isVisible": true,
+    "isFeatured": true,
+    "isNew": false,
+    "sortOrder": 1,
+    "images": [
+      {
+        "url": "/images/products/kit-led-premium-1.jpg",
+        "alt": "Kit LED Intérieur Premium - Vue d'ensemble",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/kit-led-premium-2.jpg", 
+        "alt": "Kit LED installé dans habitacle"
+      },
+      {
+        "url": "/images/products/kit-led-premium-3.jpg",
+        "alt": "Télécommande RGB avec effets"
+      }
+    ],
+    "specs": {
+      "Tension": "12V DC",
+      "Longueur": "8 bandes de 30cm",
+      "Couleurs": "16 millions",
+      "Télécommande": "Infrarouge incluse",
+      "Installation": "Plug & Play",
+      "Garantie": "2 ans"
+    },
+    "relatedProductIds": ["2", "8"]
+  },
+  {
+    "id": "2",
+    "name": "Housse Siège Sport Racing",
+    "slug": "housse-siege-sport-racing",
+    "shortDescription": "Housses sièges aspect cuir avec surpiqûres racing",
+    "description": "Donnez un look sportif à votre intérieur avec ces housses siège racing. Matière simili-cuir haute qualité, surpiqûres contrastées, ajustement parfait. Protège vos sièges tout en améliorant le confort et l'esthétique.",
+    "categoryIds": ["2"],
+    "tags": ["Racing", "Cuir", "Sport", "Protection"],
+    "isVisible": true,
+    "isFeatured": false,
+    "isNew": true,
+    "sortOrder": 2,
+    "images": [
+      {
+        "url": "/images/products/housse-racing-1.jpg",
+        "alt": "Housse Siège Sport Racing - Noir et Rouge",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/housse-racing-2.jpg",
+        "alt": "Détail surpiqûres racing"
+      }
+    ],
+    "specs": {
+      "Matière": "Simili-cuir premium",
+      "Couleur": "Noir/Rouge",
+      "Compatibilité": "Sièges avant universels",
+      "Entretien": "Lavable à l'éponge",
+      "Installation": "Élastiques et sangles",
+      "Garantie": "1 an"
+    },
+    "relatedProductIds": ["3", "5"]
+  },
+  {
+    "id": "3", 
+    "name": "Tapis Sol Caoutchouc Premium",
+    "slug": "tapis-sol-caoutchouc-premium",
+    "shortDescription": "Tapis de sol en caoutchouc haute résistance, bords surélevés",
+    "description": "Protection optimale de votre habitacle avec ces tapis caoutchouc premium. Bords surélevés anti-débordement, surface antidérapante, découpe sur-mesure selon le modèle de véhicule. Résistant aux intempéries et facile d'entretien.",
+    "categoryIds": ["2"],
+    "tags": ["Protection", "Caoutchouc", "Sur-mesure", "Premium"],
+    "isVisible": true,
+    "isFeatured": true,
+    "isNew": false,
+    "sortOrder": 3,
+    "images": [
+      {
+        "url": "/images/products/tapis-caoutchouc-1.jpg",
+        "alt": "Tapis Sol Caoutchouc Premium - Noir",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/tapis-caoutchouc-2.jpg",
+        "alt": "Détail bords surélevés"
+      }
+    ],
+    "specs": {
+      "Matière": "Caoutchouc TPE",
+      "Couleur": "Noir",
+      "Épaisseur": "5mm",
+      "Bords": "Surélevés 15mm", 
+      "Compatibilité": "Sur-mesure par modèle",
+      "Garantie": "3 ans"
+    },
+    "relatedProductIds": ["2", "4"]
+  },
+  {
+    "id": "4",
+    "name": "Stickers Carbone 3D",
+    "slug": "stickers-carbone-3d",
+    "shortDescription": "Film adhésif aspect carbone 3D, texture réaliste",
+    "description": "Personnalisez votre véhicule avec ce film carbone 3D ultra-réaliste. Texture fibres de carbone authentique, adhésif haute performance, résistant UV et intempéries. Application sans bulles, repositionnable pendant la pose.",
+    "categoryIds": ["3"],
+    "tags": ["Carbone", "3D", "Tuning", "Adhésif"],
+    "isVisible": true,
+    "isFeatured": false,
+    "isNew": true,
+    "sortOrder": 4,
+    "images": [
+      {
+        "url": "/images/products/stickers-carbone-1.jpg",
+        "alt": "Stickers Carbone 3D - Rouleau",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/stickers-carbone-2.jpg",
+        "alt": "Application sur tableau de bord"
+      }
+    ],
+    "specs": {
+      "Dimensions": "30cm x 152cm",
+      "Épaisseur": "0.18mm",
+      "Finition": "Mate carbone 3D",
+      "Adhésif": "Acrylique repositionnable",
+      "Résistance": "UV et intempéries",
+      "Garantie": "2 ans"
+    },
+    "relatedProductIds": ["6", "7"]
+  },
+  {
+    "id": "5",
+    "name": "Support Smartphone Magnetique",
+    "slug": "support-smartphone-magnetique",
+    "shortDescription": "Support magnétique universel pour grille d'aération",
+    "description": "Fixation sécurisée de votre smartphone avec ce support magnétique ultra-puissant. Rotation 360°, fixation grille d'aération, aimants néodyme haute force. Compatible tous smartphones avec plaque métallique fournie.",
+    "categoryIds": ["4", "5"],
+    "tags": ["Magnétique", "Universel", "Rotation", "Sécurisé"],
+    "isVisible": true,
+    "isFeatured": true,
+    "isNew": false,
+    "sortOrder": 5,
+    "images": [
+      {
+        "url": "/images/products/support-magnetique-1.jpg",
+        "alt": "Support Smartphone Magnétique - Noir",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/support-magnetique-2.jpg",
+        "alt": "Installation sur grille d'aération"
+      }
+    ],
+    "specs": {
+      "Fixation": "Grille d'aération",
+      "Rotation": "360 degrés",
+      "Aimants": "Néodyme N52",
+      "Compatibilité": "Smartphones 4-7 pouces",
+      "Matériaux": "ABS + Aluminium",
+      "Garantie": "1 an"
+    },
+    "relatedProductIds": ["8", "9"]
+  },
+  {
+    "id": "6",
+    "name": "Caméra de Recul HD",
+    "slug": "camera-recul-hd",
+    "shortDescription": "Caméra de recul HD avec vision nocturne et ligne de guidage",
+    "description": "Stationnez en toute sécurité avec cette caméra HD haute définition. Vision nocturne infrarouge, lignes de guidage dynamiques, écran 4.3 pouces inclus. Installation facile, étanche IP68, activation automatique marche arrière.",
+    "categoryIds": ["6", "4"],
+    "tags": ["HD", "Vision nocturne", "Sécurité", "Étanche"],
+    "isVisible": true,
+    "isFeatured": true,
+    "isNew": false,
+    "sortOrder": 6,
+    "images": [
+      {
+        "url": "/images/products/camera-recul-1.jpg",
+        "alt": "Caméra de Recul HD - Kit complet",
+        "isCover": true
+      },
+      {
+        "url": "/images/products/camera-recul-2.jpg",
+        "alt": "Écran LCD 4.3 pouces"
+      }
+    ],
+    "specs": {
+      "Résolution": "1280x720 HD",
+      "Écran": "4.3 pouces LCD",
+      "Vision nocturne": "LED infrarouge",
+      "Étanchéité": "IP68",
+      "Angle": "170 degrés",
+      "Garantie": "2 ans"
+    },
+    "relatedProductIds": ["7", "10"]
+  }
+]
