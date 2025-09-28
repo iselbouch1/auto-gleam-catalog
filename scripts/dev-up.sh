@@ -1,0 +1,97 @@
+#!/bin/bash
+set -euo pipefail
+
+echo "🚀 Auto Gleam - Démarrage de la stack complète..."
+
+# Vérifier que Docker est en marche
+if ! docker info > /dev/null 2>&1; then
+    echo "❌ Docker n'est pas en marche. Veuillez le démarrer."
+    exit 1
+fi
+
+# Créer les répertoires s'ils n'existent pas
+mkdir -p backend frontend
+
+# Copier le code existant vers la structure monorepo
+if [ ! -d "backend/app" ] && [ -d "laravel-backend" ]; then
+    echo "📁 Migration du backend vers la structure monorepo..."
+    cp -r laravel-backend/* backend/
+fi
+
+if [ ! -d "frontend/src" ] && [ -f "package.json" ]; then
+    echo "📁 Migration du frontend vers la structure monorepo..."
+    # Créer frontend/ et y copier les fichiers front
+    mkdir -p frontend
+    cp package.json frontend/
+    cp -r src frontend/ 2>/dev/null || true
+    cp -r public frontend/ 2>/dev/null || true
+    cp -r components.json frontend/ 2>/dev/null || true
+    cp tailwind.config.ts frontend/ 2>/dev/null || true
+    cp tsconfig*.json frontend/ 2>/dev/null || true
+    cp vite.config.ts frontend/ 2>/dev/null || true
+    cp index.html frontend/ 2>/dev/null || true
+    cp .env.example frontend/ 2>/dev/null || true
+fi
+
+# Construire et démarrer les services
+echo "🐳 Construction et démarrage des conteneurs..."
+docker compose up -d --build
+
+# Attendre que MySQL soit prêt
+echo "⏳ Attente de MySQL..."
+timeout=60
+while ! docker compose exec mysql mysqladmin ping -h localhost --silent 2>/dev/null; do
+    timeout=$((timeout - 1))
+    if [ $timeout -eq 0 ]; then
+        echo "❌ Timeout en attendant MySQL"
+        exit 1
+    fi
+    sleep 1
+done
+
+echo "✅ MySQL est prêt"
+
+# Installer les dépendances backend
+echo "📦 Installation des dépendances backend..."
+docker compose exec backend composer install --no-interaction
+
+# Générer la clé d'application
+echo "🔑 Génération de la clé d'application..."
+docker compose exec backend php artisan key:generate --force
+
+# Exécuter les migrations et seeders
+echo "🗃️ Migrations et seeders..."
+docker compose exec backend php artisan migrate:fresh --seed --force
+
+# Créer le lien de stockage
+echo "🔗 Création du lien de stockage..."
+docker compose exec backend php artisan storage:link
+
+# Installer les dépendances frontend
+echo "📦 Installation des dépendances frontend..."
+docker compose exec frontend npm install
+
+echo ""
+echo "🎉 Stack Auto Gleam démarrée avec succès!"
+echo ""
+echo "📍 URLs disponibles:"
+echo "   🌐 Site visiteur:    http://localhost"
+echo "   🔧 Admin Filament:   http://localhost/admin"
+echo "   📧 Mailpit:          http://localhost:8025"
+echo ""
+echo "🔐 Pour créer un compte admin:"
+echo "   ./scripts/create-admin.sh"
+echo ""
+echo "🛠️ Commandes utiles:"
+echo "   ./scripts/dev-down.sh    # Arrêter la stack"
+echo "   ./scripts/seed.sh        # Re-seeder les données"
+echo ""
+
+# Ouvrir le navigateur (si possible)
+if command -v open > /dev/null; then
+    echo "🌐 Ouverture du navigateur..."
+    open http://localhost
+elif command -v xdg-open > /dev/null; then
+    echo "🌐 Ouverture du navigateur..."
+    xdg-open http://localhost
+fi
