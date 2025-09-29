@@ -16,21 +16,24 @@ mkdir -p backend frontend
 if [ ! -d "backend/app" ] && [ -d "laravel-backend" ]; then
     echo "📁 Migration du backend vers la structure monorepo..."
     cp -r laravel-backend/* backend/
+    cp backend/.env.example backend/.env 2>/dev/null || true
 fi
 
 if [ ! -d "frontend/src" ] && [ -f "package.json" ]; then
     echo "📁 Migration du frontend vers la structure monorepo..."
     # Créer frontend/ et y copier les fichiers front
     mkdir -p frontend
-    cp package.json frontend/
+    cp package.json frontend/ 2>/dev/null || true
     cp -r src frontend/ 2>/dev/null || true
     cp -r public frontend/ 2>/dev/null || true
-    cp -r components.json frontend/ 2>/dev/null || true
+    cp components.json frontend/ 2>/dev/null || true
     cp tailwind.config.ts frontend/ 2>/dev/null || true
     cp tsconfig*.json frontend/ 2>/dev/null || true
     cp vite.config.ts frontend/ 2>/dev/null || true
     cp index.html frontend/ 2>/dev/null || true
-    cp .env.example frontend/ 2>/dev/null || true
+    cp eslint.config.js frontend/ 2>/dev/null || true
+    cp postcss.config.js frontend/ 2>/dev/null || true
+    cp frontend/.env.example frontend/.env 2>/dev/null || true
 fi
 
 # Construire et démarrer les services
