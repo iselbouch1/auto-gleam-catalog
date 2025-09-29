@@ -6,7 +6,7 @@ import "./index.css";
 import { queryClient } from "./lib/queryClient";
 import { setupRealtimeSync } from "./lib/pusher";
 
-// Configuration du temps réel
+// Configuration du temps réel (optional)
 setupRealtimeSync();
 
 createRoot(document.getElementById("root")!).render(
