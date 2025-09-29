@@ -78,14 +78,29 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    ports:
+      - "8000:8000"
+      - "8080:8080"
     command: >
       sh -c "
+      # Attendre que MySQL soit vraiment disponible
+      until php artisan db:show 2>/dev/null; do
+        echo 'Attente de la base de données...'
+        sleep 2
+      done &&
+      # Copier .env si nécessaire
       if [ ! -f .env ]; then cp .env.example .env; fi &&
-      composer install --no-interaction &&
-      php artisan key:generate --force &&
-      php artisan storage:link &&
-      php artisan migrate:fresh --seed --force &&
+      # Installer les dépendances
+      composer install --no-interaction --quiet &&
+      # Générer la clé si nécessaire
+      if [ -z \"\$(grep '^APP_KEY=' .env | cut -d'=' -f2)\" ]; then
+        php artisan key:generate --force --quiet
+      fi &&
+      # Créer le lien de stockage
+      php artisan storage:link --quiet &&
+      # Lancer Reverb en arrière-plan
       php artisan reverb:start --host=0.0.0.0 --port=8080 &
+      # Lancer le serveur Laravel
       php artisan serve --host=0.0.0.0 --port=8000
       "
 

@@ -16,7 +16,10 @@ mkdir -p backend frontend
 if [ ! -d "backend/app" ] && [ -d "laravel-backend" ]; then
     echo "📁 Migration du backend vers la structure monorepo..."
     cp -r laravel-backend/* backend/
-    cp backend/.env.example backend/.env 2>/dev/null || true
+    # Copier le .env.example seulement si le .env n'existe pas
+    if [ ! -f "backend/.env" ]; then
+        cp backend/.env.example backend/.env 2>/dev/null || true
+    fi
 fi
 
 if [ ! -d "frontend/src" ] && [ -f "package.json" ]; then
@@ -33,7 +36,10 @@ if [ ! -d "frontend/src" ] && [ -f "package.json" ]; then
     cp index.html frontend/ 2>/dev/null || true
     cp eslint.config.js frontend/ 2>/dev/null || true
     cp postcss.config.js frontend/ 2>/dev/null || true
-    cp frontend/.env.example frontend/.env 2>/dev/null || true
+    # Copier le .env.example seulement si le .env n'existe pas
+    if [ ! -f "frontend/.env" ]; then
+        cp frontend/.env.example frontend/.env 2>/dev/null || true
+    fi
 fi
 
 # Construire et démarrer les services
@@ -54,21 +60,34 @@ done
 
 echo "✅ MySQL est prêt"
 
-# Installer les dépendances backend
-echo "📦 Installation des dépendances backend..."
-docker compose exec backend composer install --no-interaction
+# Attendre que le backend soit prêt
+echo "⏳ Attente du backend..."
+timeout=60
+while ! docker compose exec backend php -v > /dev/null 2>&1; do
+    timeout=$((timeout - 1))
+    if [ $timeout -eq 0 ]; then
+        echo "❌ Timeout en attendant le backend"
+        exit 1
+    fi
+    sleep 1
+done
 
-# Générer la clé d'application
-echo "🔑 Génération de la clé d'application..."
-docker compose exec backend php artisan key:generate --force
+echo "✅ Backend est prêt"
 
-# Exécuter les migrations et seeders
-echo "🗃️ Migrations et seeders..."
-docker compose exec backend php artisan migrate:fresh --seed --force
+# Les commandes suivantes sont déjà exécutées dans le conteneur backend
+# mais on peut les re-exécuter pour s'assurer qu'elles fonctionnent
 
-# Créer le lien de stockage
-echo "🔗 Création du lien de stockage..."
-docker compose exec backend php artisan storage:link
+# Vérifier si les dépendances sont installées
+if ! docker compose exec backend composer show > /dev/null 2>&1; then
+    echo "📦 Installation des dépendances backend..."
+    docker compose exec backend composer install --no-interaction
+fi
+
+# Vérifier si la clé est générée
+if ! docker compose exec backend php artisan env:get APP_KEY > /dev/null 2>&1; then
+    echo "🔑 Génération de la clé d'application..."
+    docker compose exec backend php artisan key:generate --force
+fi
 
 # Installer les dépendances frontend
 echo "📦 Installation des dépendances frontend..."
