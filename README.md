@@ -1,223 +1,100 @@
-# AutoStyle - Catalogue Vitrine Accessoires Auto
+# 🚗 Auto Gleam - Catalogue d'accessoires automobiles
 
-Application React moderne pour un catalogue vitrine d'accessoires et décorations automobiles. Interface élégante style automotive avec gestion complète des catégories, produits et recherche.
+Catalogue moderne d'accessoires automobiles avec backend Laravel + Filament et frontend React.
 
-## 🚀 Fonctionnalités
-
-### ✨ Interface Utilisateur
-- **Design Automotive Premium** : Palette sombre/métallique, micro-interactions fluides
-- **Responsive Mobile-First** : Optimisé pour tous les écrans
-- **Navigation Intuitive** : Header avec menu catégories et recherche globale
-- **Animations Fluides** : Hover effects, transitions et loading states
-
-### 📱 Pages & Fonctionnalités
-- **Accueil** : Hero section + grille catégories/nouveautés
-- **Pages Catégories** : Liste paginée avec filtres et tri
-- **Fiches Produits** : Galeries d'images, spécifications, produits liés
-- **Recherche Globale** : Filtres avancés par catégorie, tags, etc.
-- **SEO Optimisé** : Meta tags, Open Graph, données structurées
-
-### 🛠 Architecture Technique
-- **Frontend** : Vite + React 18 + TypeScript + Tailwind CSS
-- **Routing** : React Router v6 avec pages dynamiques
-- **Design System** : Composants réutilisables, variants customisés
-- **Mock Data** : Interface prête pour API REST
-- **État** : React Query pour la gestion des données
-
-## 🏗 Structure du Projet
+## 📁 Structure du projet
 
 ```
-src/
-├── components/           # Composants réutilisables
-│   ├── ui/              # Composants shadcn personnalisés
-│   ├── ProductCard.tsx   # Carte produit avec badges
-│   ├── CategoryCard.tsx  # Carte catégorie avec overlay
-│   ├── Header.tsx        # Navigation avec menu dropdown
-│   └── Footer.tsx        # Pied de page avec liens
-├── pages/               # Pages de l'application
-│   ├── Home.tsx         # Page d'accueil avec hero
-│   ├── CategoryPage.tsx # Liste produits par catégorie
-│   └── NotFound.tsx     # Page 404 stylée
-├── lib/                 # Services et utilitaires
-│   └── api.ts           # Adaptateur API avec mock data
-├── data/                # Données de test
-│   ├── categories.json  # Catégories avec descriptions
-│   └── products.json    # Produits avec specs complètes
-├── types/               # Interfaces TypeScript
-│   └── index.ts         # Types Category, Product, etc.
-└── index.css            # Design system avec tokens
+auto-gleam/
+├── backend/          # Backend Laravel + Filament CMS
+│   ├── app/
+│   ├── config/
+│   ├── database/
+│   ├── routes/
+│   └── ...
+└── frontend/         # Frontend React + Vite
+    ├── src/
+    ├── public/
+    └── ...
 ```
 
-## 🎨 Design System
+## 🚀 Démarrage rapide
 
-### Couleurs Automotive
-- **Primary** : Noir profond élégant (`--primary`)
-- **Accent** : Rouge racing (`--accent`) 
-- **Secondary** : Gris métallique (`--secondary`)
-- **Success/Warning/Destructive** : États avec feedback visuel
+### Option 1 : Développement local (Recommandé)
 
-### Composants Stylés
-- **Cards** : `.card-auto` avec hover effects et ombres
-- **Buttons** : `.btn-automotive`, `.btn-secondary-auto`
-- **Grilles** : `.product-grid`, `.category-grid` responsives
-- **Badges** : `.badge-new`, `.badge-featured` avec gradients
+Consultez **[RUN.md](./RUN.md)** pour le guide complet d'installation et d'exécution en local.
 
-## 🚀 Installation & Lancement
-
-### Prérequis
-- Node.js 18+ et npm
-- Ou Bun pour une installation plus rapide
-
-### Démarrage Rapide
 ```bash
-# Installation des dépendances
+# 1. Backend
+cd backend
+composer install
+cp .env.example .env
+php artisan key:generate
+php artisan migrate --seed
+php artisan serve
+
+# 2. Frontend (dans un autre terminal)
+cd frontend
 npm install
-# ou : bun install
-
-# Lancement en développement
+cp .env.example .env
 npm run dev
-# ou : bun dev
-
-# Ouvrir http://localhost:8080
 ```
 
-### Commandes Disponibles
+### Option 2 : Docker
+
+Consultez **[GUIDE-DOCKER.md](./GUIDE-DOCKER.md)** ou **[RUN-QUICK.md](./RUN-QUICK.md)** pour Docker.
+
 ```bash
-npm run dev        # Serveur de développement
-npm run build      # Build de production  
-npm run preview    # Aperçu du build
-npm run lint       # Vérification ESLint
+./scripts/dev-up.sh
 ```
 
-## 🔧 Configuration API
+## 🌐 URLs d'accès
 
-### Environnement
-Copiez `.env.example` vers `.env` et configurez :
+| Service | URL | Identifiants |
+|---------|-----|--------------|
+| Site visiteur | http://localhost:5173 | - |
+| Admin Filament | http://localhost:8000/admin | admin@example.com |
+| API | http://localhost:8000/api/v1 | - |
 
-```env
-# Mode mock (données locales)
-VITE_USE_MOCK=true
-VITE_API_BASE_URL=""
+## 🛠️ Technologies
 
-# Mode API (production)
-VITE_USE_MOCK=false
-VITE_API_BASE_URL=https://api.autostyle.fr
-```
+### Backend
+- Laravel 11
+- Filament 3 (Admin Panel)
+- Spatie Media Library
+- Laravel Reverb (WebSockets)
+- MySQL
 
-### Endpoints Attendus
-L'adaptateur API attend ces routes REST :
+### Frontend
+- React 18
+- TypeScript
+- Vite
+- TailwindCSS
+- React Query
+- React Router
+- Pusher.js (WebSockets)
 
-```
-GET /api/v1/categories           # Liste des catégories
-GET /api/v1/categories/{slug}    # Catégorie par slug
-GET /api/v1/products             # Liste produits (avec filtres)
-GET /api/v1/products/{slug}      # Produit par slug
-GET /api/v1/products/{id}/related # Produits liés
-```
+## 📚 Documentation
 
-### Paramètres de Filtrage
-- `search` : Recherche textuelle
-- `category` : ID de catégorie
-- `tags` : Tags séparés par virgule
-- `featured=1` : Coups de cœur uniquement  
-- `visible=1` : Produits visibles uniquement
-- `page`, `per_page` : Pagination
-- `sort_by`, `sort_order` : Tri
+- [RUN.md](./RUN.md) - Guide d'exécution local complet
+- [GUIDE-DOCKER.md](./GUIDE-DOCKER.md) - Guide Docker détaillé
+- [RUN-QUICK.md](./RUN-QUICK.md) - Démarrage rapide Docker
 
-## 📊 Types de Données
+## ✨ Fonctionnalités
 
-### Category
-```typescript
-interface Category {
-  id: string;
-  name: string;
-  slug: string;
-  description?: string;
-  image?: string;
-  isVisible: boolean;
-  sortOrder?: number;
-}
-```
+- ✅ Catalogue de produits avec catégories
+- ✅ Recherche et filtres avancés
+- ✅ Admin panel Filament complet
+- ✅ Upload d'images multiple
+- ✅ Tags et spécifications produits
+- ✅ API RESTful
+- ✅ Temps réel avec WebSockets (optionnel)
+- ✅ Responsive design
 
-### Product  
-```typescript
-interface Product {
-  id: string;
-  name: string;
-  slug: string;
-  shortDescription?: string;
-  description?: string;
-  categoryIds: string[];
-  tags?: string[];
-  isVisible: boolean;
-  isFeatured?: boolean;
-  isNew?: boolean;
-  images: ProductImage[];
-  specs?: Record<string, string | number | boolean>;
-  relatedProductIds?: string[];
-}
-```
+## 🤝 Contribution
 
-## 🎯 Fonctionnalités Clés
+Ce projet est un catalogue de démonstration. Vous pouvez l'adapter à vos besoins.
 
-### Catalogue Vitrine
-- **Pas de prix ni panier** - Vitrine uniquement
-- **Catégories hiérarchiques** avec images et descriptions
-- **Produits avec galeries** d'images haute résolution
-- **Système de tags** pour filtrage avancé
-- **Badges produits** (Nouveau, Coup de cœur)
+## 📝 Licence
 
-### UX/Accessibilité
-- **Navigation clavier** complète
-- **Alt text** automatique pour les images
-- **Contrastes optimisés** pour lisibilité
-- **Responsive design** mobile-first
-- **Loading states** avec skeletons
-
-### SEO & Performance
-- **Meta tags** dynamiques par page
-- **Open Graph** et Twitter Cards
-- **Données structurées** JSON-LD
-- **Images lazy loading** pour performance
-- **Canonical URLs** pour référencement
-
-## 🚦 Roadmap
-
-### V1 (Actuelle)
-- ✅ Catalogue vitrine complet
-- ✅ Design system automotive
-- ✅ Navigation et recherche
-- ✅ SEO optimisé
-
-### V2 (Prochaine)
-- 🔄 Page produit détaillée avec zoom
-- 🔄 Filtres latéraux avancés
-- 🔄 Pagination infinie
-- 🔄 Partage social
-
-### V3 (Future)
-- 📋 Système de favoris
-- 🌐 Internationalisation (i18n)
-- 📊 Analytics et suivi
-- 🔍 Recherche intelligente
-
-## 📝 Notes Techniques
-
-- **Pas de backend** - Frontend pur avec mock data
-- **TypeScript strict** pour la robustesse
-- **ESLint + Prettier** pour la qualité du code
-- **Composants modulaires** facilement réutilisables
-- **Design tokens** centralisés dans index.css
-
-## 🎨 Branding
-
-**AutoStyle** représente l'élégance automotive avec :
-- Logo moderne dans header/footer
-- Palette couleurs inspirée automobile
-- Typographie sans-serif lisible
-- Micro-interactions soignées
-- Esthétique haut de gamme
-
----
-
-**Développé avec ❤️ pour les passionnés d'automobile**
+MIT
